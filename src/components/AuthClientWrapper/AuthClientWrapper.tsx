@@ -4,7 +4,11 @@ import { useState } from 'react';
 import { Type } from '../Header/Header';
 import SignModal from '@/modals/SignModal';
 
-export default function AuthClientWrapper({ children }: { children: React.ReactNode }) {
+export default function AuthClientWrapper({
+  children,
+}: {
+  children: React.ReactNode;
+}) {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [activeType, setActiveType] = useState<Type | null>(null);
 
@@ -33,4 +37,4 @@ export default function AuthClientWrapper({ children }: { children: React.ReactN
       />
     </div>
   );
-};
+}

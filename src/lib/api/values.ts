@@ -1,4 +1,4 @@
-import axiosClient from "../axiosClient";
+import axiosClient from '../axiosClient';
 
 export const fetchValues = async (token: string) => {
   try {
@@ -9,7 +9,7 @@ export const fetchValues = async (token: string) => {
     });
     return response.data;
   } catch (error) {
-    console.error("Error fetching values", error);
+    console.error('Error fetching values', error);
     throw error;
   }
 };
@@ -23,7 +23,7 @@ export const fetchValueById = async (id: string, token: string) => {
     });
     return response.data;
   } catch (error) {
-    console.error("Error fetching value by ID", error);
+    console.error('Error fetching value by ID', error);
     throw error;
   }
 };

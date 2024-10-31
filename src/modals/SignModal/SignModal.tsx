@@ -1,14 +1,13 @@
-"use client";
+'use client';
 
-import { useEffect, useState } from "react";
-import crossCircle from "@/assets/svg/x-circle.svg";
-import { Type } from "@/components/Header/Header";
-import AuthInput from "@/UI/AuthInput";
-import Image from "next/image";
-import Link from "next/link";
-import { signIn, signUp } from "@/lib/api/auth";
-import UserDataModel from "@/models/UserDataModel";
-import UserCredentialsModel from "@/models/UserCredentialsModel";
+import { useEffect, useState } from 'react';
+import crossCircle from '@/assets/svg/x-circle.svg';
+import { Type } from '@/components/Header/Header';
+import AuthInput from '@/UI/AuthInput';
+import Image from 'next/image';
+import { signIn, signUp } from '@/lib/api/auth';
+import UserDataModel from '@/models/UserDataModel';
+import UserCredentialsModel from '@/models/UserCredentialsModel';
 
 type SignModalProps = {
   isOpen: boolean;
@@ -25,15 +24,22 @@ interface FormState {
   agreeToTerms: boolean;
 }
 
-export default function SignModal({ isOpen, onClose, type, onTypeChange }: SignModalProps) {
+export default function SignModal({
+  isOpen,
+  onClose,
+  type,
+  onTypeChange,
+}: SignModalProps) {
   const [formState, setFormState] = useState<FormState>({
-    name: "",
-    email: "",
-    password: "",
-    phone: "",
+    name: '',
+    email: '',
+    password: '',
+    phone: '',
     agreeToTerms: false,
   });
-  const [fieldErrors, setFieldErrors] = useState<Partial<Record<keyof FormState, string>>>({});
+  const [fieldErrors, setFieldErrors] = useState<
+    Partial<Record<keyof FormState, string>>
+  >({});
   const [isLoading, setIsLoading] = useState(false);
   const [generalError, setGeneralError] = useState<string | null>(null);
 
@@ -42,10 +48,10 @@ export default function SignModal({ isOpen, onClose, type, onTypeChange }: SignM
       onTypeChange(type);
       // Reset form state and errors when type changes
       setFormState({
-        name: "",
-        email: "",
-        password: "",
-        phone: "",
+        name: '',
+        email: '',
+        password: '',
+        phone: '',
         agreeToTerms: false,
       });
       setFieldErrors({});
@@ -59,53 +65,54 @@ export default function SignModal({ isOpen, onClose, type, onTypeChange }: SignM
     onTypeChange(isSignUp ? Type.SignIn : Type.SignUp);
   };
 
-
   const isSignUp = type === Type.SignUp;
-  const modalTitle = isSignUp ? "Sign Up" : "Sign In";
-  const buttonText = isSignUp ? "Sign Up" : "Sign In";
-  const switchText = isSignUp ? "Already have an account?" : "Don't have an account?";
-  const switchButtonText = isSignUp ? "Log in" : "Sign Up";
+  const modalTitle = isSignUp ? 'Sign Up' : 'Sign In';
+  const buttonText = isSignUp ? 'Sign Up' : 'Sign In';
+  const switchText = isSignUp
+    ? 'Already have an account?'
+    : "Don't have an account?";
+  const switchButtonText = isSignUp ? 'Log in' : 'Sign Up';
 
   const handleInputChange = (field: keyof FormState) => (value: string) => {
-    setFormState(prev => ({ ...prev, [field]: value }));
+    setFormState((prev) => ({ ...prev, [field]: value }));
     // Clear error for this field when user starts typing
     if (fieldErrors[field]) {
-      setFieldErrors(prev => ({ ...prev, [field]: undefined }));
+      setFieldErrors((prev) => ({ ...prev, [field]: undefined }));
     }
     setGeneralError(null);
   };
 
   const validateForm = (): boolean => {
     const errors: Partial<Record<keyof FormState, string>> = {};
-    
+
     // Email validation
     if (!formState.email) {
-      errors.email = "Email is required";
+      errors.email = 'Email is required';
     } else if (!/\S+@\S+\.\S+/.test(formState.email)) {
-      errors.email = "Please enter a valid email";
+      errors.email = 'Please enter a valid email';
     }
 
     // Password validation
     if (!formState.password) {
-      errors.password = "Password is required";
+      errors.password = 'Password is required';
     } else if (formState.password.length < 6) {
-      errors.password = "Password must be at least 6 characters";
+      errors.password = 'Password must be at least 6 characters';
     }
 
     if (isSignUp) {
       // Full name validation
       if (!formState.name) {
-        errors.name = "Full name is required";
+        errors.name = 'Full name is required';
       }
 
       // Phone validation
       if (!formState.phone) {
-        errors.phone = "Phone number is required";
+        errors.phone = 'Phone number is required';
       }
     }
 
     if (!formState.agreeToTerms) {
-      errors.agreeToTerms = "Please agree to the Privacy Policy";
+      errors.agreeToTerms = 'Please agree to the Privacy Policy';
     }
 
     setFieldErrors(errors);
@@ -138,10 +145,14 @@ export default function SignModal({ isOpen, onClose, type, onTypeChange }: SignM
 
         await signIn(credentials);
       }
-      
+
       onClose();
     } catch (err) {
-      setGeneralError(err instanceof Error ? err.message : "An error occurred during authentication");
+      setGeneralError(
+        err instanceof Error
+          ? err.message
+          : 'An error occurred during authentication'
+      );
     } finally {
       setIsLoading(false);
     }
@@ -168,38 +179,38 @@ export default function SignModal({ isOpen, onClose, type, onTypeChange }: SignM
 
         {isSignUp && (
           <>
-            <AuthInput 
-              headText="Full Name" 
+            <AuthInput
+              headText="Full Name"
               placeholderText="Name Surname"
               value={formState.name}
-              onChange={handleInputChange("name")}
+              onChange={handleInputChange('name')}
               error={fieldErrors.name}
             />
-            <AuthInput 
-              headText="Your Phone" 
+            <AuthInput
+              headText="Your Phone"
               placeholderText="Phone"
               type="tel"
               value={formState.phone}
-              onChange={handleInputChange("phone")}
+              onChange={handleInputChange('phone')}
               error={fieldErrors.phone}
             />
           </>
         )}
-        
-        <AuthInput 
-          headText="Your Email" 
+
+        <AuthInput
+          headText="Your Email"
           placeholderText="Mail"
           type="email"
           value={formState.email}
-          onChange={handleInputChange("email")}
+          onChange={handleInputChange('email')}
           error={fieldErrors.email}
         />
-        <AuthInput 
-          headText="Password" 
+        <AuthInput
+          headText="Password"
           placeholderText="Password"
           type="password"
           value={formState.password}
-          onChange={handleInputChange("password")}
+          onChange={handleInputChange('password')}
           error={fieldErrors.password}
         />
 
@@ -209,9 +220,15 @@ export default function SignModal({ isOpen, onClose, type, onTypeChange }: SignM
             type="checkbox"
             checked={formState.agreeToTerms}
             onChange={(e) => {
-              setFormState(prev => ({ ...prev, agreeToTerms: e.target.checked }));
+              setFormState((prev) => ({
+                ...prev,
+                agreeToTerms: e.target.checked,
+              }));
               if (fieldErrors.agreeToTerms) {
-                setFieldErrors(prev => ({ ...prev, agreeToTerms: undefined }));
+                setFieldErrors((prev) => ({
+                  ...prev,
+                  agreeToTerms: undefined,
+                }));
               }
             }}
           />
@@ -220,17 +237,19 @@ export default function SignModal({ isOpen, onClose, type, onTypeChange }: SignM
           </div>
         </div>
         {fieldErrors.agreeToTerms && (
-          <div className="text-red-500 text-xs mt-1">{fieldErrors.agreeToTerms}</div>
+          <div className="text-red-500 text-xs mt-1">
+            {fieldErrors.agreeToTerms}
+          </div>
         )}
 
-        <button 
+        <button
           className={`w-[120px] h-12 px-6 py-3 bg-black rounded-3xl justify-center items-center gap-2.5 inline-flex
             ${isLoading ? 'opacity-50 cursor-not-allowed' : 'hover:bg-gray-800'}`}
           onClick={handleSubmit}
           disabled={isLoading}
         >
           <div className="text-white text-[15px] font-bold font-['Source Sans 3'] leading-normal">
-            {isLoading ? "Loading..." : buttonText}
+            {isLoading ? 'Loading...' : buttonText}
           </div>
         </button>
 

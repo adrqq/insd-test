@@ -1,4 +1,4 @@
-import localFont from "next/font/local";
+import localFont from 'next/font/local';
 
 export const sourceSansPro = localFont({
   variable: '--font-source-sans-pro',
@@ -35,6 +35,6 @@ export const sourceSansPro = localFont({
       path: './SourceSansPro-Black.otf',
       weight: '900',
       style: 'normal',
-    }
+    },
   ],
 });

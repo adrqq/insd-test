@@ -1,11 +1,11 @@
-import { Type } from "@/components/Header/Header";
+import { Type } from '@/components/Header/Header';
 
 type AuthButtonProps = {
   text: string;
   type: Type;
 };
 
-export default async function AuthButton ({ text, type }: AuthButtonProps) {
+export default async function AuthButton({ text, type }: AuthButtonProps) {
   return (
     <button
       data-auth-type={type}
@@ -16,4 +16,4 @@ export default async function AuthButton ({ text, type }: AuthButtonProps) {
       {text}
     </button>
   );
-};
+}

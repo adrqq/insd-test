@@ -1,1 +1,1 @@
-export { default } from "./OurValues";
+export { default } from './OurValues';

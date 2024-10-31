@@ -1,4 +1,4 @@
 export default interface UserCredentialsModel {
-  email: string; 
+  email: string;
   password: string;
 }

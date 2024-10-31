@@ -1,9 +1,9 @@
-"use client";
+'use client';
 
 export type AuthInputProps = {
   headText: string;
   placeholderText: string;
-  type?: "text" | "email" | "password" | "tel";
+  type?: 'text' | 'email' | 'password' | 'tel';
   value: string;
   onChange: (value: string) => void;
   error?: string;
@@ -12,10 +12,10 @@ export type AuthInputProps = {
 export default function AuthInput({
   headText,
   placeholderText,
-  type = "text",
+  type = 'text',
   value,
   onChange,
-  error
+  error,
 }: AuthInputProps) {
   return (
     <div className="w-full">
@@ -31,11 +31,7 @@ export default function AuthInput({
         value={value}
         onChange={(e) => onChange(e.target.value)}
       />
-      {error && (
-        <div className="text-red-500 text-xs mt-1">
-          {error}
-        </div>
-      )}
+      {error && <div className="text-red-500 text-xs mt-1">{error}</div>}
     </div>
   );
 }

@@ -1,27 +1,19 @@
-import Image from "next/image";
-import mainLogo from "@/assets/svg/main-logo.svg";
-import Link from "next/link";
-import LinkTo from "@/UI/LinkTo";
-import s from "./Header.module.scss"
-import AuthButton from "@/UI/AuthButton";
-import AuthClientWrapper from "../AuthClientWrapper";
+import Image from 'next/image';
+import mainLogo from '@/assets/svg/main-logo.svg';
+import LinkTo from '@/UI/LinkTo';
+import AuthButton from '@/UI/AuthButton';
+import AuthClientWrapper from '../AuthClientWrapper';
 
 export enum Type {
-  SignIn = "signIn",
-  SignUp = "signUp"
+  SignIn = 'signIn',
+  SignUp = 'signUp',
 }
 
-export type HeaderProps = {
-  // props go here
-};
-export default async function Header(props: HeaderProps) {
+export default async function Header() {
   return (
     <header className="w-full h-[100px] flex items-center justify-between mb-[32px]">
       <div className="">
-        <Image
-          src={mainLogo}
-          alt="cimpany-logo"
-        />
+        <Image src={mainLogo} alt="company-logo" />
       </div>
 
       <div className="h-[37px] justify-between items-start inline-flex">
