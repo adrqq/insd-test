@@ -1,14 +1,13 @@
 import type { Metadata } from 'next';
 import './globals.css';
-import { Poppins, Source_Sans_3 } from 'next/font/google';
+import { Source_Sans_3 } from 'next/font/google';
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
-import SignInModal from '@/modals/SignUpModal';
 
-const poppins = Poppins({
-  weight: ['400', '600', '700'],
-  subsets: ['latin'],
-});
+// const poppins = Poppins({
+//   weight: ['400', '600', '700'],
+//   subsets: ['latin'],
+// });
 
 const sourceSans3 = Source_Sans_3({
   weight: ['400', '600', '700'],
