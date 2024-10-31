@@ -13,7 +13,6 @@
   },
   "dependencies": {
     "axios": "^1.7.7",
-    "husky": "^9.1.6",
     "next": "15.0.1",
     "react": "19.0.0-rc-69d4b800-20241021",
     "react-dom": "19.0.0-rc-69d4b800-20241021"
@@ -28,7 +27,14 @@
     "postcss": "^8",
     "prettier": "^3.3.3",
     "tailwindcss": "^3.4.1",
-    "typescript": "^5"
+    "typescript": "^5",
+    "husky": "^9.1.6"
   },
-  "proxy": "https://test-task-b4cg.onrender.com"
+  "proxy": "https://test-task-b4cg.onrender.com",
+  "lint-staged": {
+    "*.{js,jsx,ts,tsx}": [
+      "eslint --fix",
+      "prettier --write"
+    ]
+  }
 }
